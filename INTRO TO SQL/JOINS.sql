@@ -149,3 +149,89 @@ ORDER BY COUNT(CustomerID) DESC
  -- SQL statement lists the ProductName if ALL the records in the OrderDetails table has Quantity equal to 10. This will of course return FALSE because the Quantity column has many different values (not only the value of 10):
   sELECT ProductName FROM products
  WHERE ProductID = ALL (SELECT ProductID FROM order_details WHERE Quantity=10)
+
+
+--SELECT INTO 
+-- creates a backup copy of Customers
+SELECT * INTO CustomersBackup FROM customers
+SELECT * FROM CustomersBackup;
+
+-- statement copies only a few columns(CustomerName, ContactName) into a new table
+SELECT CustomerName, ContactName INTO CustomersBackup1 FROM customers
+SELECT * FROM CustomersBackup1;
+
+-- statement copies only the German customers into a new table
+SELECT CustomerName, ContactName INTO CustomersBackup2 FROM customers
+WHERE COUNTRY='GERMANY'
+SELECT * FROM CustomersBackup2;
+
+--copies data from more than one table into a new table
+SELECT CustomerName,OrderID INTO CustomersBackup3 FROM customers
+INNER JOIN ORDERS ON customers.CustomerID=orders.CustomerID
+SELECT * FROM CustomersBackup3
+
+
+--SQL statement copies "Suppliers" into "Customers" (CustomerName, City, Country)
+insert into customers(CustomerName, City, Country)
+select supplierName, City, Country from suppliers
+select * from customers
+
+-- SQL statement copies "Suppliers" into "Customers" 
+INSERT INTO customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+SELECT SupplierName, ContactName, Address, City, PostalCode, Country FROM suppliers
+
+--SQL statement copies only the German suppliers into "Customers"
+INSERT INTO customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+SELECT SupplierName, ContactName, Address, City, PostalCode, Country FROM suppliers 
+WHERE Country = 'GERMANY'
+
+DELETE FROM customers
+WHERE CustomerID>91
+SELECT * from customers
+
+--CASE
+--SQL will order the customers by City. However, if City is NULL, then order by Country
+sELECT * FROM customers
+ORDER BY (CASE
+				WHEN City IS NULL THEN COUNTRY
+				ELSE City
+		 END);
+
+
+--STORED PROCEDURE
+
+--creates a stored procedure named "SelectAllCustomers" that selects all records from the "Customers" table
+USE w3schools
+GO
+
+CREATE PROCEDURE SelectAllCustomers
+AS
+SELECT * FROM customers
+GO
+
+EXEC SelectAllCustomers
+
+--a stored procedure that selects Customers from a particular City from the "Customers" table
+USE w3schools
+GO
+
+CREATE PROCEDURE CustomresFromCity @City varchar(30)
+AS 
+SELECT * from customers WHERE City = @City
+GO
+
+EXEC CustomresFromCity @CITY = 'LONDON'
+
+
+--SQL statement creates a stored procedure that selects Customers from a particular City with a particular PostalCode from the "Customers" table
+USE w3schools
+GO
+
+CREATE PROCEDURE CustomresFromCity2 @City varchar(30),@POSTALCODE VARCHAR(20)
+AS 
+SELECT * from customers 
+WHERE City = @City AND PostalCode = @POSTALCODE
+GO
+
+EXEC CustomresFromCity2 @CITY = 'LONDON', @POSTALCODE = 'WA1 1DP'
+
