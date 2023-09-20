@@ -1,0 +1,17 @@
+select * from CUSTOMER
+select * from ORDER_DETAILS
+select * FROM SHIPPING_TYPE
+SELECT * FROM SHOPPING_CART
+/*
+CREATE VIEW CUSTOMER_DETAILS AS
+select Customer_Name as cName, concat(Street_Address,',',City) as address,Order_ID,Date_Of_Purchase,Book_Name,SHOPPING_CART.PRICE,SHIPPING_TYPE.Shipping_Type,Shipping_Price from customer 
+inner join ORDER_DETAILS
+on ORDER_DETAILS.Customer_ID = CUSTOMER.Customer_ID
+INNER JOIN SHIPPING_TYPE
+ON ORDER_DETAILS.Shipping_Type = SHIPPING_TYPE.Shipping_Type
+INNER JOIN SHOPPING_CART
+ON ORDER_DETAILS.Shopping_Cart_ID = SHOPPING_CART.Shopping_Cart_ID
+INNER JOIN BOOKS
+ON SHOPPING_CART.Book_ID = BOOKS.Book_ID
+*/
+SELECT * FROM CUSTOMER_DETAILS
