@@ -91,7 +91,7 @@ on orders.CustomerID=customers.CustomerID
 where OrderID in (10411,10422,10442,10405,10439,10397,10428,10443,10440)
 */
 
-Select EmpID,LastName,FirstName,OrderCount,t1.LatestOrderID,OrderDate,cname,BirthDate,photo,Notes 
+Select EmpID,LastName,FirstName,OrderCount,t1.LatestOrderID,OrderDate,cname,BirthDate,photo,Notes,DATEDIFF(YEAR,birthdate,dateName(year,getdate())) as age
 from (SELECT employees.EmployeeID as EmpID,COUNT(ORDERS.OrderID) AS OrderCount,MAX(OrderID) AS LatestOrderId FROM employees
 	  INNER JOIN orders
 	  ON employees.EmployeeID=orders.EmployeeID

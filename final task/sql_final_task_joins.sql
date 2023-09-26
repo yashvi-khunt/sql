@@ -1,0 +1,16 @@
+--write a SQL query to find the name of all reviewers who have rated their ratings with a NULL value. Return reviewer name.
+--write a SQL query to find the actors who were cast in the movie 'Annie Hall'. Return actor first name, last name and role. 
+--write a SQL query to find the director who directed a movie that casted a role for 'Eyes Wide Shut'. Return director first name, last name and movie title.
+--write a SQL query to find who directed a movie that casted a role as ‘Sean Maguire’. Return director first name, last name and movie title.
+--write a SQL query to find the actors who have not acted in any movie between1990 and 2000 (Begin and end values are included.). Return actor first name, last name, movie title and release year.
+--write a SQL query to find the directors with number of genres movies. Group the result set on director first name, last name and generic title. Sort the result-set in ascending order by director first name and last name. Return director first name, last name and number of genres movies.
+--write a SQL query to find the movies with year and genres. Return movie title, movie year and generic title.
+--write a SQL query to find all the movies with year, genres, and name of the director.
+--write a SQL query to find the movies released before 1st January 1989. Sort the result-set in descending order by date of release. Return movie title, release year, date of release, duration, and first and last name of the director.
+--write a SQL query to compute the average time and count number of movies for each genre. Return genre title, average time and number of movies for each genre.
+-- write a SQL query to find movies with the lowest duration. Return movie title, movie year, director first name, last name, actor first name, last name and role.
+--write a SQL query to find those years when a movie received a rating of 3 or 4. Sort the result in increasing order on movie year. Return move year. 
+--write a SQL query to get the reviewer name, movie title, and stars in an order that reviewer name will come first, then by movie title, and lastly by number of stars.
+--write a SQL query to find those movies that have at least one rating and received highest number of stars. Sort the result-set on movie title. Return movie title and maximum review stars.
+--write a SQL query to find those movies, which have received ratings. Return movie title, director first name, director last name and review stars.
+--Write a query in SQL to find the movie title, actor first and last name, and the role for those movies where one or more actors acted in two or more movies. 
