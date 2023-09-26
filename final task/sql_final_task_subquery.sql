@@ -163,14 +163,12 @@ ON reviewer.rev_id=rating.rev_id
 where rev_stars = any (select min(rev_stars) from rating)
 
 -- write a SQL query to find the movies directed by 'James Cameron'. Return movie title. 
-Select mov_title from (select movie.mov_id as mov_id,mov_title from movie
-						inner join movie_direction
-						on movie.mov_id=movie_direction.mov_id) as mov
-inner join (select mov_id from movie_direction
-			inner join director
-			on director.dir_id=movie_direction.dir_id
-			where CONCAT(dir_fname,' ',dir_lname)='james cameron') as dir
-on mov.mov_id=dir.mov_id
+
+select mov_title from movie m
+inner join movie_direction md
+on md.mov_id=m.mov_id
+where dir_id = any(select dir_id from director 
+					where dir_fname='james' and dir_lname='cameron')
 
 select mov_title from movie
 inner join movie_direction as md
