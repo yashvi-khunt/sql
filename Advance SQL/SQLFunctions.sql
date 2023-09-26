@@ -1,3 +1,5 @@
+
+--db: task
 --scaler functions --SUM, AVG, MAX, MIN, COUNT, UPPER, LOWER, LEN, CONCAT, SUBSTRING, DATEPART
 
 select sum(employee_id) as sumOfID
@@ -35,4 +37,47 @@ from EMPLOYEES
 
 select * from EMPLOYEEs
 select convert(varchar,salary) as covertString,cast(salary as varchar(2)) as castString,try_parse(phone_number as int) as parseString from employees
+
+--mathematical functions(ABS, ROUND, CEILING, FLOOR, POWER, SQRT, EXP, LOG, SIN, COS, TAN)
+select abs(-100.111),abs(-100.111)
+select round(100.111,1),round(100.111,2)
+select CEILING(100.111)
+select FLOOR(100.111)
+select POWER(9,2)
+select sqrt(9)
+select exp(2)
+select log(10)
+select log10(10)
+select sin(2)
+select cos(2)
+select tan(2)
+
+--window functions( RANK, DENSE_RANK, NTILE, LEAD, LAG, first_value, last_value)
+
+--RANK
+select *,rank() over(order by department_id) as rank_dep from EMPLOYEES 
+
+--dense rank
+select *,dense_rank() over(order by department_id) as dRank_dep from EMPLOYEES 
+
+
+--NTILE
+SELECT *,
+NTILE(12) OVER(ORDER BY department_id) ntile_dep
+from EMPLOYEES 
+
+--lead
+select Employee_ID,First_Name,Last_Name,Hire_Date,Salary,LEAD(Salary,1) over (order by salary) next_salary from EMPLOYEES
+
+--lag
+select Employee_ID,First_Name,Last_Name,Hire_Date,Salary,lag(Salary,1) over (order by salary) prev_salary from EMPLOYEES
+
+--first_value --last_value
+SELECT *,
+FIRST_VALUE(department_id) OVER( ORDER BY department_id) first_department
+FROM EMPLOYEES
+
+SELECT *,
+LAST_VALUE(department_id) OVER(ORDER BY department_id asc) last_department
+FROM EMPLOYEES
 
