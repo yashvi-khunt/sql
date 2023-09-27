@@ -1,4 +1,5 @@
-/*
+
+use task
 Select *  from employees
 left join (Select concat(First_Name,' ',Last_Name) as ManagerName,Employee_ID AS EMPid,Hire_Date as ManagerHireDate from EMPLOYEES) as a
 on a.EMPid = EMPLOYEES.Manager_ID
@@ -39,11 +40,11 @@ SELECT Department_ID,Department_Name FROM DEPARTMENTS
 except 
 select Department_ID,department_name from DEPARTMENTS
 where Department_ID =  any (select Department_ID from EMPLOYEEs where job_id='st_clerk')
-*/
+
 
 
 /* DB - moview_w3 */
-
+use MOVIES_W3
 select dir_fname,dir_lname,mov_title from movie m
 left join movie_direction md
 on m.mov_id=md.mov_id

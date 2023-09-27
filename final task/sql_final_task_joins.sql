@@ -1,4 +1,4 @@
-
+select * from rating order by mov_id
 --write a SQL query to find the name of all reviewers who have rated their ratings with a NULL value. Return reviewer name.
 select rev_name from reviewer
 inner join rating	
@@ -42,14 +42,14 @@ where not mov_year between 1990 and 2000
 
 --write a SQL query to find the directors with number of genres movies. Group the result set on director first name, last name and generic title. Sort the result-set in ascending order by director first name and last name. Return director first name, last name and number of genres movies.
 
- select dir_fname as firstName,dir_lname as lastName,count(g.gen_id) as countGen from director as d
+ select */*dir_fname as firstName,dir_lname as lastName,count(mg.gen_id) as countGen*/ from director as d
 inner join movie_direction as md
 on md.dir_id = d.dir_id
 inner join movie_genres as mg
 on mg.mov_id = md.mov_id
 inner join genres as g 
 on g.gen_id=mg.gen_id
-group by dir_fname,dir_lname
+group by dir_fname,dir_lname,mg.gen_id
 order by dir_fname,dir_lname
 
 
