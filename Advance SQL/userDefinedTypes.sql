@@ -15,3 +15,12 @@ insert into @act
 select act_fname,act_lname,10 from actor
 EXEC readActors @ACT	
 
+use task
+select * from employees
+
+alter table employees
+alter column email email
+
+select *
+from INFORMATION_SCHEMA.COLUMNS
+where TABLE_NAME='employees';
