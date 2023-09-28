@@ -7,9 +7,10 @@ select * into
 from EMPLOYEES
 where Department_ID = 50
 
-
+use MOVIES_W3
 select * from #temp_emp
 /*  temp table method 2 */
+use TASK
 create table #temp2
 (
 	employee_id int,
