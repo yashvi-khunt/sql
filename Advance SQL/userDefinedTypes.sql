@@ -15,6 +15,3 @@ insert into @act
 select act_fname,act_lname,10 from actor
 EXEC readActors @ACT	
 
-
-
-
