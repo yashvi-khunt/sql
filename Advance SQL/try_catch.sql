@@ -9,3 +9,11 @@ begin catch
 end catch
 
 
+begin try
+update EMPLOYEES
+set Department_ID=220 where Employee_ID=100
+end try
+begin catch
+	print(error_message())
+end catch
+
