@@ -43,8 +43,46 @@ select * from dbo.paging(2,10)
 
 
 --4. ‘Select EmpId, FirstName, LastName, PhoneNumber, Email from Employees’ check the execution plan for the given query and save it. Now, optimize the query and then check the execution plan and save it.
-
+select * from EMPLOYEES
 Select Employee_ID, First_Name, Last_Name, Phone_Number, Email from Employees
+
 
 --5. Create a stored procedure that prints the employee info in the following format: 'employeename' hired on 'hiredate' has a salary package of 'salarypackage' Print only for 10 employees Implement it using cursor and then with while loop also
 
+create procedure employeeInfo
+as
+begin
+	declare cursor_emp cursor for
+	select top(10) CONCAT_WS(' ',First_Name,Last_Name),Hire_Date,Salary from EMPLOYEES
+
+	open cursor_emp	;
+
+	declare @hire_date date, @emp_name varchar(100),@emp_salary int
+
+	fetch next from cursor_emp into @emp_name,@hire_date,@emp_salary
+	while @@FETCH_STATUS = 0
+		begin
+		print concat_ws(' ',@emp_name,'hired on',convert(varchar(20),@hire_date),'has salary package of',cast(@emp_salary as varchar(10)))
+		fetch next from cursor_emp into @emp_name,@hire_date,@emp_salary
+		end;
+	close cursor_emp
+	deallocate cursor_emp
+end
+
+exec employeeInfo
+
+
+alter procedure employeeInfo2 @limit int 
+as 
+begin	
+	declare @i int = 1;
+	declare @hire_date date, @emp_name varchar(100),@emp_salary int
+	while @i <= @limit
+	begin
+		select @emp_name=CONCAT_WS(' ',First_Name,Last_Name),@hire_date=Hire_Date,@emp_salary=Salary from dbo.paging(1,@i)
+		print concat_ws(' ',@emp_name,'hired on',convert(varchar(20),@hire_date),'has salary package of',cast(@emp_salary as varchar(10)))
+		set @i = @i + 1;
+	end
+end
+
+exec employeeInfo2 @limit = 10
